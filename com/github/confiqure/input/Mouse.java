@@ -19,7 +19,7 @@ public class Mouse {
      *
      * Creates new instance of Mouse.
      * 
-     * @throws AWTException if the Robot could not be instanced.
+     * @throws AWTException if the Robot could not be instanced
      * @see java.awt.Robot;
      */
     public Mouse() throws AWTException {
@@ -33,6 +33,24 @@ public class Mouse {
      */
     public void click() {
         click(true);
+    }
+    
+    /**
+     *
+     * Clicks the Mouse.
+     * 
+     * @param left true for left click, false for right click
+     */
+    public void click(final boolean left) {
+        if (left) {
+            r.mousePress(MouseEvent.BUTTON1_MASK);
+            Time.sleep(50);
+            r.mouseRelease(MouseEvent.BUTTON1_MASK);
+        } else {
+            r.mousePress(MouseEvent.BUTTON3_MASK);
+            Time.sleep(50);
+            r.mouseRelease(MouseEvent.BUTTON3_MASK);
+        }
     }
     
     /**
@@ -60,24 +78,6 @@ public class Mouse {
         move(x, y);
         Time.sleep(100);
         click(left);
-    }
-    
-    /**
-     *
-     * Clicks the Mouse.
-     * 
-     * @param left true for left click, false for right click
-     */
-    public void click(final boolean left) {
-        if (left) {
-            r.mousePress(MouseEvent.BUTTON1_MASK);
-            Time.sleep(50);
-            r.mouseRelease(MouseEvent.BUTTON1_MASK);
-        } else {
-            r.mousePress(MouseEvent.BUTTON3_MASK);
-            Time.sleep(50);
-            r.mouseRelease(MouseEvent.BUTTON3_MASK);
-        }
     }
     
     /**
