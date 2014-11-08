@@ -44,6 +44,18 @@ public class Images {
      *
      * Creates a screen capture of a specific part of the display.
      * 
+     * @param rect bounds to take screen shot
+     * @return a screen capture of the entire screen
+     * @see java.awt.Rectangle
+     */
+    public BufferedImage screenshot(final Rectangle rect) {
+        return r.createScreenCapture(rect);
+    }
+    
+    /**
+     *
+     * Creates a screen capture of a specific part of the display.
+     * 
      * @param x x-coordinate to start the capture
      * @param y y-coordinate to start the capture
      * @param width width of the capture
@@ -51,7 +63,7 @@ public class Images {
      * @return a screen capture of the specified rectangle of the screen
      */
     public BufferedImage screenshot(final int x, final int y, final int width, final int height) {
-        return r.createScreenCapture(new Rectangle(x, y, width, height));
+        return screenshot(new Rectangle(x, y, width, height));
     }
     
     /**
