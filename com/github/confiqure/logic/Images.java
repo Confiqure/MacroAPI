@@ -23,7 +23,7 @@ public class Images {
      * Creates new instance of Images.
      * 
      * @throws AWTException if the Robot could not be instanced
-     * @see java.awt.Robot;
+     * @see java.awt.Robot
      */
     public Images() throws AWTException {
         r = new Robot();

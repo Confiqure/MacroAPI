@@ -22,7 +22,7 @@ public class Keyboard {
      * Creates new instance of Keyboard.
      * 
      * @throws AWTException if the Robot could not be instanced
-     * @see java.awt.Robot;
+     * @see java.awt.Robot
      */
     public Keyboard() throws AWTException {
         r = new Robot();

@@ -20,7 +20,7 @@ public class Mouse {
      * Creates new instance of Mouse.
      * 
      * @throws AWTException if the Robot could not be instanced
-     * @see java.awt.Robot;
+     * @see java.awt.Robot
      */
     public Mouse() throws AWTException {
         r = new Robot();
