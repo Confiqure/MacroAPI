@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
  */
 public class Keyboard {
     
-    private Robot r = null;
+    private final Robot r;
     
     /**
      *

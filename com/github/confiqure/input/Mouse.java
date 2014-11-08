@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
  */
 public class Mouse {
     
-    private Robot r = null;
+    private final Robot r;
     
     /**
      *
