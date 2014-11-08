@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
  */
 public class Images {
     
+    private final Dimension d;
     private final Robot r;
     
     /**
@@ -26,6 +27,7 @@ public class Images {
      * @see java.awt.Robot
      */
     public Images() throws AWTException {
+        d = Toolkit.getDefaultToolkit().getScreenSize();
         r = new Robot();
     }
     
@@ -36,7 +38,6 @@ public class Images {
      * @return a screen capture of the entire screen
      */
     public BufferedImage screenshot() {
-        final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         return r.createScreenCapture(new Rectangle(0, 0, d.width, d.height));
     }
     
