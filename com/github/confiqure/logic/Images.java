@@ -33,6 +33,30 @@ public class Images {
     
     /**
      *
+     * Returns the color of a specific pixel on screen.
+     * 
+     * @param p Point of the pixel
+     * @return the RGB value of the color in the default sRGB ColorModel
+     * @see java.awt.Point
+     */
+    public int getColorOnScreen(final Point p) {
+        return getColorOnScreen(p.x, p.y);
+    }
+    
+    /**
+     *
+     * Returns the color of a specific pixel on screen.
+     * 
+     * @param x x-coordinate of the pixel
+     * @param y y-coordinate of the pixel
+     * @return the RGB value of the color in the default sRGB ColorModel
+     */
+    public int getColorOnScreen(final int x, final int y) {
+        return r.getPixelColor(x, y).getRGB();
+    }
+        
+    /**
+     *
      * Creates a screen capture of the entire display.
      * 
      * @return a screen capture of the entire screen

@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 public class Keyboard {
     
     private final Robot r;
+    private long PRESS_SLEEP = 50;
     
     /**
      *
@@ -37,11 +38,11 @@ public class Keyboard {
      */
     public void comboType(final int key1, final int key2) {
         r.keyPress(key1);
-        Time.sleep(50);
+        Time.sleep(PRESS_SLEEP);
         r.keyPress(key2);
-        Time.sleep(50);
+        Time.sleep(PRESS_SLEEP);
         r.keyRelease(key2);
-        Time.sleep(50);
+        Time.sleep(PRESS_SLEEP);
         r.keyRelease(key1);
     }
     
@@ -52,8 +53,20 @@ public class Keyboard {
      * @param text text to paste
      */
     public void paste(final String text) {
+        paste(text, false);
+    }
+    
+    /**
+     *
+     * Pastes specific text.
+     * 
+     * @param text text to paste
+     * @param enter create a new line after pasting text
+     */
+    public void paste(final String text, final boolean enter) {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(text), null);
         comboType(KeyEvent.VK_CONTROL, KeyEvent.VK_V);
+        if (enter) type(KeyEvent.VK_ENTER);
     }
     
     /**
@@ -64,8 +77,18 @@ public class Keyboard {
      */
     public void type(final int key) {
         r.keyPress(key);
-        Time.sleep(50);
+        Time.sleep(PRESS_SLEEP);
         r.keyRelease(key);
+    }
+    
+    /**
+     *
+     * Sets the time to sleep after pressing a key.
+     * 
+     * @param sleep milliseconds to sleep: 50ms by default
+     */
+    public void setPressSleep(final long sleep) {
+        PRESS_SLEEP = sleep;
     }
     
 }
