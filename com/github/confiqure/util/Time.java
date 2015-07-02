@@ -54,7 +54,7 @@ public class Time {
      * @see java.util.concurrent.Callable
      */
     public static boolean wait(final Callable<Boolean> waitFor, final long duration, final int iterations) {
-        for (int i = 0; i < iterations; i++) {
+        for (int i = 0; i != iterations; i++) {
             try {
                 if (waitFor.call()) {
                     return true;
