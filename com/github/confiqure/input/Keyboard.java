@@ -1,10 +1,9 @@
 package com.github.confiqure.input;
 
+import com.github.confiqure.io.Clipboard;
 import com.github.confiqure.util.Time;
 import java.awt.AWTException;
 import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
 /**
@@ -58,15 +57,24 @@ public class Keyboard {
     
     /**
      *
-     * Pastes specific text.
+     * Pastes specific text. Compatible with Macintosh, Windows, and Linux operating systems.
      * 
      * @param text text to paste
      * @param enter create a new line after pasting text
+     * @return true if text pasted successfully
      */
-    public void paste(final String text, final boolean enter) {
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(text), null);
-        comboType(KeyEvent.VK_CONTROL, KeyEvent.VK_V);
-        if (enter) type(KeyEvent.VK_ENTER);
+    public boolean paste(final String text, final boolean enter) {
+        Clipboard.set(text);
+        if (System.getProperty("os.name").contains("Mac")) {
+            comboType(KeyEvent.VK_META, KeyEvent.VK_V);
+            if (enter) type(KeyEvent.VK_ENTER);
+            return true;
+        } else if (System.getProperty("os.name").contains("Windows") || System.getProperty("os.name").contains("Linux")) {
+            comboType(KeyEvent.VK_CONTROL, KeyEvent.VK_V);
+            if (enter) type(KeyEvent.VK_ENTER);
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -79,6 +87,26 @@ public class Keyboard {
         r.keyPress(key);
         Time.sleep(PRESS_SLEEP);
         r.keyRelease(key);
+    }
+    
+    /**
+     *
+     * Uses quit hotkey. Compatible with Macintosh, Windows, and Linux operating systems.
+     * 
+     * @return true if hotkey was applied, false if not
+     */
+    public boolean quit() {
+        if (System.getProperty("os.name").contains("Mac")) {
+            comboType(KeyEvent.VK_META, KeyEvent.VK_Q);
+            return true;
+        } else if (System.getProperty("os.name").contains("Windows")) {
+            comboType(KeyEvent.VK_ALT, KeyEvent.VK_F4);
+            return true;
+        } else if (System.getProperty("os.name").contains("Linux")) {
+            comboType(KeyEvent.VK_CONTROL, KeyEvent.VK_Q);
+            return true;
+        }
+        return false;
     }
     
     /**

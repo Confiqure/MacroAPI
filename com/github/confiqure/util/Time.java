@@ -12,9 +12,10 @@ public class Time {
     
     /**
      *
-     * Rather than using System#getTimeMillis() to keep track of time which can be altered, this method utilizes System#nanoTime() to return a number of milliseconds.
+     * Rather than using the current milliseconds to keep track of time which can be altered, this method utilizes nanoseconds to return a number of milliseconds.
      * 
      * @return an arbitrary amount of milliseconds based on current time
+     * @see java.lang.System#nanoTime()
      */
     public static long millis() {
         return System.nanoTime() / 1000000;
@@ -48,18 +49,18 @@ public class Time {
      * Sleeps until a specific event occurs. This event is customizable through a Callable object.
      * 
      * @param waitFor the event to wait for
-     * @param duration duration of time in milliseconds to sleep per iteration
+     * @param sleep duration of time in milliseconds to sleep per iteration
      * @param iterations number of iterations to sleep before aborting
      * @return true if the event occurred or false if the maximum number of sleep cycles was reached, or if there was an error while sleeping
      * @see java.util.concurrent.Callable
      */
-    public static boolean wait(final Callable<Boolean> waitFor, final long duration, final int iterations) {
+    public static boolean wait(final Callable<Boolean> waitFor, final long sleep, final int iterations) {
         for (int i = 0; i != iterations; i++) {
             try {
                 if (waitFor.call()) {
                     return true;
                 }
-                Thread.sleep(duration);
+                Thread.sleep(sleep);
             } catch (final Exception ex) {
                 return false;
             }

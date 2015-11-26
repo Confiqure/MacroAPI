@@ -95,10 +95,10 @@ public class Images {
      *
      * Checks if a larger BufferedImage contains a smaller BufferedImage.
      * 
-     * @see java.awt.image.BufferedImage
      * @param haystack image to search
      * @param needle image to search for
      * @return true if the smaller image is contained within the larger image
+     * @see java.awt.image.BufferedImage
      */
     public static boolean contains(final BufferedImage haystack, final BufferedImage needle) {
         return getContainsPoint(haystack, needle) != null;
@@ -106,12 +106,37 @@ public class Images {
     
     /**
      *
+     * Checks if the current screen contains a smaller BufferedImage.
+     * 
+     * @param needle image to search for
+     * @return true if the smaller image is contained within the current screen
+     * @see java.awt.image.BufferedImage
+     */
+    public boolean contains(final BufferedImage needle) {
+        return getContainsPoint(screenshot(), needle) != null;
+    }
+    
+    /**
+     *
+     * Checks if an area on the current screen contains a smaller BufferedImage.
+     * 
+     * @param needle image to search for
+     * @param area area on the screen to scan
+     * @return true if the smaller image is contained within the area defined on the current screen
+     * @see java.awt.image.BufferedImage
+     */
+    public boolean contains(final BufferedImage needle, final Rectangle area) {
+        return getContainsPoint(screenshot(area), needle) != null;
+    }
+    
+    /**
+     *
      * Returns Point where the smaller BufferedImage is contained within the larger BufferedImage.
      * 
-     * @see java.awt.image.BufferedImage
      * @param haystack image to search
      * @param needle image to search for
      * @return point where the smaller BufferedImage is represented in the larger BufferedImage or null if needle is not a subset of haystack
+     * @see java.awt.image.BufferedImage
      */
     public static Point getContainsPoint(final BufferedImage haystack, final BufferedImage needle) {
         //loop through each of haystack's pixels
@@ -139,10 +164,10 @@ public class Images {
      *
      * Determines if two BufferedImage objects are the same.
      * 
-     * @see java.awt.image.BufferedImage
      * @param a first image to compare
      * @param b second image to compare
      * @return true if both sizes are equal and if all the corresponding pixels are the same colors
+     * @see java.awt.image.BufferedImage
      */
     public static boolean equals(final BufferedImage a, final BufferedImage b) {
         if (a.getWidth() != b.getWidth() || a.getHeight() != b.getHeight()) {

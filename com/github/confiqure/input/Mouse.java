@@ -146,6 +146,17 @@ public class Mouse {
     
     /**
      *
+     * Rotates the scroll wheel.
+     * 
+     * @param amt number of notches to rotate. Negative indicates the wheel is moving away, positive indicates toward the user.
+     */
+    public void wheel(final int amt) {
+        r.mouseWheel(amt);
+        Time.sleep(MOVE_SLEEP);
+    }
+    
+    /**
+     *
      * Sets the time to sleep in between mouse clicks.
      * 
      * @param sleep milliseconds to sleep: 50ms by default
