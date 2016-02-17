@@ -91,7 +91,7 @@ public class Logger {
      */
     public boolean screenshot(final Images images) {
         try {
-            if (log == null) {
+            if (log == null || !log.toString().contains(File.separator)) {
                 return ImageIO.write(images.screenshot(), "png", new File(new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()) + ".png"));
             }
             return ImageIO.write(images.screenshot(), "png", new File(log.toString().substring(0, log.toString().lastIndexOf(File.separator)), new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()) + ".png"));
@@ -111,10 +111,10 @@ public class Logger {
      */
     public boolean screenshot(final Images images, final Rectangle area) {
         try {
-            if (log == null) {
-                return ImageIO.write(images.screenshot(area), "png", new File(sdf.format(new Date()) + ".png"));
+            if (log == null || !log.toString().contains(File.separator)) {
+                return ImageIO.write(images.screenshot(area), "png", new File(new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()) + ".png"));
             }
-            return ImageIO.write(images.screenshot(area), "png", new File(log.toString().substring(0, log.toString().lastIndexOf(File.separator)), sdf.format(new Date()) + ".png"));
+            return ImageIO.write(images.screenshot(area), "png", new File(log.toString().substring(0, log.toString().lastIndexOf(File.separator)), new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date()) + ".png"));
         } catch (final IOException ex) {
             return false;
         }
