@@ -139,6 +139,7 @@ public class Images {
      * @see java.awt.image.BufferedImage
      */
     public static Point getContainsPoint(final BufferedImage haystack, final BufferedImage needle) {
+        if (haystack == null || needle == null) return null;
         //loop through each of haystack's pixels
         for (int offX = 0; offX < haystack.getWidth() - needle.getWidth(); offX++) {
             for (int offY = 0; offY <= haystack.getHeight() - needle.getHeight(); offY++) {
@@ -162,6 +163,25 @@ public class Images {
     
     /**
      *
+     * Checks if a larger BufferedImage contains a pixel color.
+     * 
+     * @param haystack image to search
+     * @param needle pixel RGB integer to search for
+     * @return true if the pixel color is contained within the larger image
+     * @see java.awt.image.BufferedImage
+     */
+    public static boolean contains(final BufferedImage haystack, final int needle) {
+        if (haystack == null) return false;
+        for (int x = 0; x < haystack.getWidth(); x++) {
+            for (int y = 0; y < haystack.getHeight(); y++) {
+                if (haystack.getRGB(x, y) == needle) return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     *
      * Determines if two BufferedImage objects are the same.
      * 
      * @param a first image to compare
@@ -170,7 +190,7 @@ public class Images {
      * @see java.awt.image.BufferedImage
      */
     public static boolean equals(final BufferedImage a, final BufferedImage b) {
-        if (a.getWidth() != b.getWidth() || a.getHeight() != b.getHeight()) {
+        if (a == null || b == null || a.getWidth() != b.getWidth() || a.getHeight() != b.getHeight()) {
             return false;
         }
         for (int x = 0; x < a.getWidth(); x++) {
